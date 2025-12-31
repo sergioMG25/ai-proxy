@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "ai-proxy-collection-v1",
+		"name": "AI Proxy API",
+		"description": "Colección completa para probar el AI Proxy con Groq, Cerebras y Gemini",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has status healthy\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"healthy\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": ["{{baseUrl}}"],
+					"path": ["health"]
+				},
+				"description": "Verifica el estado del servidor y obtiene estadísticas de uso"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Groq (llama3-8b-8192)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.content).to.exist;",
+							"    pm.expect(jsonData.content.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Service used is Groq\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.service).to.eql(\"Groq\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Explica qué es la inteligencia artificial en una frase corta\"\n    }\n  ],\n  \"service\": \"groq\",\n  \"model\": \"llama3-8b-8192\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Envía una petición de chat usando el servicio Groq con el modelo llama3-8b-8192"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Cerebras (llama3.1-8b)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.content).to.exist;",
+							"});",
+							"",
+							"pm.test(\"Service used is Cerebras\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.service).to.eql(\"Cerebras\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"¿Cuál es la capital de Francia?\"\n    }\n  ],\n  \"service\": \"cerebras\",\n  \"model\": \"llama3.1-8b\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Envía una petición de chat usando el servicio Cerebras con el modelo llama3.1-8b"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Gemini (gemini-2.0-flash-exp)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.content).to.exist;",
+							"});",
+							"",
+							"pm.test(\"Service used is Gemini\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.service).to.eql(\"Gemini\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Escribe un haiku sobre la programación\"\n    }\n  ],\n  \"service\": \"gemini\",\n  \"model\": \"gemini-2.0-flash-exp\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Envía una petición de chat usando el servicio Gemini con el modelo gemini-2.0-flash-exp"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Auto (Round-Robin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.content).to.exist;",
+							"});",
+							"",
+							"pm.test(\"Service was selected automatically\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.service).to.be.oneOf([\"Groq\", \"Cerebras\", \"Gemini\"]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Dame un dato curioso sobre el espacio\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Envía una petición sin especificar servicio. El sistema usará round-robin para distribuir la carga."
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Conversación Multi-turno",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.content).to.exist;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"¿Cuál es la capital de España?\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"La capital de España es Madrid.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"¿Cuántos habitantes tiene aproximadamente?\"\n    }\n  ],\n  \"service\": \"groq\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Ejemplo de conversación con múltiples turnos manteniendo contexto"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Con Parámetros Avanzados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Eres un asistente experto en historia.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Cuéntame sobre la Revolución Francesa en 3 puntos\"\n    }\n  ],\n  \"service\": \"gemini\",\n  \"model\": \"gemini-2.0-flash-exp\",\n  \"temperature\": 0.7,\n  \"max_tokens\": 500\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/chat",
+					"host": ["{{baseUrl}}"],
+					"path": ["chat"]
+				},
+				"description": "Ejemplo usando parámetros avanzados como temperature y max_tokens, con mensaje de sistema"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3001",
+			"type": "string"
+		}
+	]
+}

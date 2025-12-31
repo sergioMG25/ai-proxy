@@ -37,6 +37,22 @@ GOOGLE_API_KEY=tu_clave_real_de_google
 PORT=3001
 ```
 
+## 📮 Probar con Postman
+
+Hemos incluido una colección completa de Postman con todas las peticiones pre-configuradas y tests automáticos:
+
+1. Importa el archivo `AI-Proxy.postman_collection.json` en Postman
+2. Consulta la guía completa en [POSTMAN.md](POSTMAN.md)
+
+La colección incluye:
+
+- ✅ Health check
+- ✅ Chat con Groq, Cerebras y Gemini
+- ✅ Modo automático (round-robin)
+- ✅ Conversaciones multi-turno
+- ✅ Parámetros avanzados
+- ✅ Tests automáticos integrados
+
 ## 💻 Uso
 
 ### Iniciar el servidor
