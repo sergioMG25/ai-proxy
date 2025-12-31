@@ -9,13 +9,13 @@ export const cerebrasService: AIService = {
   name: 'Cerebras',
   chat: async function* (messages: ChatMessage[]) {
     try {
-      const completion = await client.chat.completions.create({
-        messages: messages,
-        model: "llama3-70b-8192",
+      const stream = await client.chat.completions.create({
+        messages: messages as any,
+        model: "llama3.1-8b",
         stream: true,
       });
 
-      for await (const chunk of completion) {
+      for await (const chunk of stream) {
         const content = chunk.choices[0]?.delta?.content || "";
         if (content) yield content;
       }

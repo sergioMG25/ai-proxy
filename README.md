@@ -138,9 +138,9 @@ Esto garantiza alta disponibilidad incluso cuando uno o más servicios están ca
 
 ### Modelos Usados
 
-- **Groq**: `mixtral-8x7b-32768`
-- **Cerebras**: `llama3-70b-8192`
-- **Gemini**: `gemini-1.5-flash`
+- **Groq**: `llama-3.3-70b-versatile`
+- **Cerebras**: `llama3.1-8b`
+- **Gemini**: `gemini-2.0-flash-exp`
 
 ## 📁 Estructura del Proyecto
 
