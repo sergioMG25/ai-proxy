@@ -1,0 +1,19 @@
+{
+  "name": "ai-proxy-free",
+  "version": "1.0.0",
+  "description": "AI Proxy with multiple providers (Groq, Cerebras, Gemini)",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "bun run index.ts",
+    "start": "bun run index.ts"
+  },
+  "dependencies": {
+    "groq-sdk": "latest",
+    "@cerebras/cerebras_cloud_sdk": "latest",
+    "@google/generative-ai": "latest"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
