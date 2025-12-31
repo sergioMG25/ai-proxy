@@ -70,7 +70,7 @@ async function* chatWithFallback(messages: ChatMessage[]) {
 }
 
 Bun.serve({
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3001,
   async fetch(req) {
     const url = new URL(req.url);
 
@@ -155,4 +155,4 @@ Bun.serve({
   },
 });
 
-logger.info(`🚀 Server running on port ${process.env.PORT || 3000}`);
+logger.info(`🚀 Server running on port ${process.env.PORT || 3001}`);

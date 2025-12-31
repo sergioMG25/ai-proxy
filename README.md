@@ -34,7 +34,7 @@ bun install
 GROQ_API_KEY=tu_clave_real_de_groq
 CEREBRAS_API_KEY=tu_clave_real_de_cerebras
 GOOGLE_API_KEY=tu_clave_real_de_google
-PORT=3000
+PORT=3001
 ```
 
 ## 💻 Uso
@@ -45,14 +45,14 @@ PORT=3000
 bun run index.ts
 ```
 
-El servidor iniciará en el puerto 3000 (o el configurado en `.env`).
+El servidor iniciará en el puerto 3001 (o el configurado en `.env`).
 
 ### Endpoint: POST /chat
 
 Envía solicitudes de chat con streaming:
 
 ```bash
-curl -X POST http://localhost:3000/chat \
+curl -X POST http://localhost:3001/chat \
   -H "Content-Type: application/json" \
   -d '{
     "messages": [
@@ -79,7 +79,7 @@ curl -X POST http://localhost:3000/chat \
 Verifica el estado del servidor y obtén estadísticas:
 
 ```bash
-curl http://localhost:3000/health
+curl http://localhost:3001/health
 ```
 
 **Response:**
@@ -147,7 +147,7 @@ ai-proxy-free/
 El servidor proporciona logs detallados con timestamps:
 
 ```
-[2025-12-30T06:10:00.000Z] INFO: 🚀 Server running on port 3000
+[2025-12-30T06:10:00.000Z] INFO: 🚀 Server running on port 3001
 [2025-12-30T06:10:05.123Z] INFO: Processing chat request with 2 messages
 [2025-12-30T06:10:05.124Z] INFO: Attempt 1/3: Using service Groq
 [2025-12-30T06:10:06.456Z] INFO: Successfully completed request with Groq
@@ -185,7 +185,7 @@ docker build -t ai-proxy-free .
 
 ```bash
 docker run -d \
-  -p 3000:3000 \
+  -p 3001:3001 \
   -e GROQ_API_KEY=tu_clave_groq \
   -e CEREBRAS_API_KEY=tu_clave_cerebras \
   -e GOOGLE_API_KEY=tu_clave_google \
@@ -248,4 +248,4 @@ Si faltan variables de entorno, el servidor mostrará warnings pero continuará 
 
 **Problema**: El servidor no inicia
 
-- **Solución**: Asegúrate de tener Bun instalado y que el puerto 3000 esté disponible
+- **Solución**: Asegúrate de tener Bun instalado y que el puerto 3001 esté disponible

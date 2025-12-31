@@ -16,7 +16,7 @@
 docker-compose up -d
 
 # 3. Verifica el estado
-curl http://localhost:3000/health
+curl http://localhost:3001/health
 
 # 4. Ver logs en tiempo real
 docker-compose logs -f
@@ -33,7 +33,7 @@ docker build -t ai-proxy-free .
 
 # Ejecutar
 docker run -d \
-  -p 3000:3000 \
+  -p 3001:3001 \
   -e GROQ_API_KEY=tu_clave \
   -e CEREBRAS_API_KEY=tu_clave \
   -e GOOGLE_API_KEY=tu_clave \
@@ -65,7 +65,7 @@ docker ps
 - ✅ Health checks automáticos integrados
 - ✅ Restart automático en caso de fallo
 - ✅ Variables de entorno desde .env
-- ✅ Puerto 3000 expuesto
+- ✅ Puerto 3001 expuesto
 
 ## 🔍 Debugging
 
